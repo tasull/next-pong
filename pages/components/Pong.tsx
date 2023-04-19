@@ -69,7 +69,7 @@ const Pong: React.FC = () => {
             const draw = () => {
                 // Clear canvas
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "#2276a2";
+                ctx.fillStyle = "#ccbdaa";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 // Draw particles
