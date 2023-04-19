@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {Particle} from "components/pages/components/Particle";
+import {Particle} from "components/elements/Particle";
 
 const randomFloat = (min: number, max: number): number => {
     return Math.random() * (max - min) + min;
