@@ -5,7 +5,7 @@ const randomFloat = (min: number, max: number): number => {
 };
 
 const Pong: React.FC = () => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement | null>(null)!;
     const [player1Score, setPlayer1Score] = useState<number>(0);
     const [player2Score, setPlayer2Score] = useState<number>(0);
     const paddleWidth = 10;
@@ -15,7 +15,7 @@ const Pong: React.FC = () => {
     useEffect(() => {
             if (!canvasRef.current) return;
 
-            const canvas = canvasRef.current;
+            const canvas = canvasRef.current!;
             const ctx = canvas.getContext('2d');
 
             if (!ctx) return;
