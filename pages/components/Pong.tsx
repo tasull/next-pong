@@ -1,4 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
+import {Particle} from "components/pages/components/Particle";
 
 const randomFloat = (min: number, max: number): number => {
     return Math.random() * (max - min) + min;
@@ -11,6 +12,18 @@ const Pong: React.FC = () => {
     const paddleWidth = 10;
     const paddleHeight = 100;
     const paddleSpeed = 5;
+
+    const particles = [];
+
+    const spawnParticles = (x, y, color, count) => {
+        for (let i = 0; i < count; i++) {
+            const size = randomFloat(3, 7);
+            const velocityX = randomFloat(-1, 2);
+            const velocityY = randomFloat(-1, 2);
+            const life = Math.floor(randomFloat(40, 70));
+            particles.push(new Particle(x, y, size, color, velocityX, velocityY, life));
+        }
+    };
 
     useEffect(() => {
             if (!canvasRef.current) return;
@@ -59,6 +72,16 @@ const Pong: React.FC = () => {
                 ctx.fillStyle = "#2276a2";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+                // Draw particles
+                particles.forEach((particle, index) => {
+                    if (particle.life <= 0) {
+                        particles.splice(index, 1);
+                    } else {
+                        particle.update();
+                        particle.draw(ctx);
+                    }
+                });
+
                 // Draw ball
                 ctx.beginPath();
                 ctx.arc(ballX, ballY, 10, 0, Math.PI * 2);
@@ -98,6 +121,9 @@ const Pong: React.FC = () => {
                     ballSpeedX = -ballSpeedX;
                     ballSpeedY += randomFloat(-2, 2);
                     ballColor = getRandomColor();
+
+                    // Spawn particles at the ball's position
+                    spawnParticles(ballX, ballY, ballColor, 20);
                 }
 
                 // Update scores
