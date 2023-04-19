@@ -13,7 +13,7 @@ const Pong: React.FC = () => {
     const paddleHeight = 100;
     const paddleSpeed = 5;
 
-    const particles = [];
+    const particles: Particle[] = [];
 
     const spawnParticles = (x, y, color, count) => {
         for (let i = 0; i < count; i++) {
