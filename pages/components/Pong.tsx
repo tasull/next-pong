@@ -15,7 +15,7 @@ const Pong: React.FC = () => {
 
     const particles: Particle[] = [];
 
-    const spawnParticles = (x, y, color, count) => {
+    const spawnParticles = (x: number, y: number, color: string, count: number) => {
         for (let i = 0; i < count; i++) {
             const size = randomFloat(3, 7);
             const velocityX = randomFloat(-1, 2);
